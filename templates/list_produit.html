@@ -1,0 +1,68 @@
+{% extends 'base.html'%}
+
+
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+    <div class="d-flex justify-content-between">
+        <div>
+            <h4>Liste des produits</h4>
+        </div>
+        <a href="" class="btn shadow-none btn-sm btn-outline-success" data-toggle="modal" data-target="#produit-modal">
+            <span class="fa fa-plus"></span>
+        </a>
+    </div>
+        <table class="table">
+            <tr>
+                <th>nom</th>
+                <th>code</th>
+                <th>Fournisseur</th>
+                <th>Date de creation</th>
+            </tr>
+            {% for obj in produits %}
+            <tr>
+                <td>{{ obj.nom }}</td>
+                <td>{{ obj.code }}</td>
+                <td>{{ obj.provider }}</td>
+                <td>{{ obj.created_at }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+
+
+
+    <div class="modal fade" id="produit-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">Ajouter un produit</div>
+                <div class="modal-body">
+                    <form action="{% url 'add_produit' %}" method="post" id="provider-form">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="">Nom</label>
+                            <input required type="text" class="form-control" name="nom">
+                        </div>
+                        <div class="mb-3">
+                            <label for="">Code</label>
+                            <input required type="text" class="form-control" name="code">
+                        </div>
+                       <div class="mb-3">
+                           <label for="">Fournisseur</label>
+                           <select required name="provider_id" id="">
+                               {% for provider in providers %}
+                               <option value="{{ provider.pk }}">{{ provider.nom }}</option>
+                               {% endfor %}
+
+                           </select>
+                       </div>
+                        <button type="submit" class="btn btn-success btn-md float-right">Enregistrer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

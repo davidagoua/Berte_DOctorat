@@ -1,0 +1,71 @@
+{% extends 'base.html'%}
+
+
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+    <div class="d-flex justify-content-between">
+        <div>
+            <h4>Liste des vehicules</h4>
+        </div>
+        <a href="" class="btn shadow-none btn-sm btn-outline-success" data-toggle="modal" data-target="#vehicule-modal">
+            <span class="fa fa-plus"></span>
+        </a>
+    </div>
+        <table class="table">
+            <tr>
+                <th>nom</th>
+                <th>Nombre de compatiment</th>
+                <th>Capacité</th>
+                <th>Coût</th>
+                <th>Date de création</th>
+            </tr>
+            {% for obj in vehicules %}
+            <tr>
+                <td>{{ obj.nom }}</td>
+                <td>{{ obj.nombrecompat }}</td>
+                <td>{{ obj.capacitecompat }}</td>
+                <td>{{ obj.cout }}</td>
+                <td>{{ obj.created_at }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+
+
+    <div class="modal fade" id="vehicule-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">Ajouter un Vehicule</div>
+                <div class="modal-body">
+                    <form action="{% url 'add_vehicule' %}" method="post" id="">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="">Nom</label>
+                            <input type="text" class="form-control" name="nom">
+                        </div>
+                        <div class="mb-3">
+                            <label for="">Nombre Compat</label>
+                            <input type="number" class="form-control" name="nombrecompat">
+                        </div>
+                        <div class="mb-3">
+                            <label for="">Capacité Compat</label>
+                            <input type="number" class="form-control" name="capacitecompat">
+                        </div>
+                        <div class="mb-3">
+                            <label for="">Coût</label>
+                            <input type="number" class="form-control" name="cout">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-md float-right">Enregistrer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

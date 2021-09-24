@@ -1,0 +1,37 @@
+{% extends 'base.html'%}
+
+
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+    <div class="d-flex justify-content-between">
+        <div>
+            <h4>Liste des fournisseurs</h4>
+        </div>
+        <a href="" class="btn shadow-none btn-sm btn-outline-success" data-toggle="modal" data-target="#fournisseur-modal">
+            <span class="fa fa-plus"></span>
+        </a>
+    </div>
+        <table class="table">
+            <tr>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Code</th>
+                <th>Date de depart</th>
+                <th>Date d'arrivé</th>
+            </tr>
+            {% for provider in providers %}
+            <tr>
+                <td>{{ provider.nom }}</td>
+                <td>{{ provider.type }}</td>
+                <td>{{ provider.code }}</td>
+                <td>{{ provider.x }}</td>
+                <td>{{ provider.y }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+{% endblock %}
